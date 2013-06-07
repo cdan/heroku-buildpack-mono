@@ -70,7 +70,7 @@ if [ "${SLN}" != "" ]; then
   ln -s "${CACHE_DIR}/mono" /app
   export PATH="/app/mono/bin:${PATH}"
 
-  ${CACHE_DIR}/mono/bin/xbuild /property:Configuration=Release ${SLN} | indent
+  ${CACHE_DIR}/bin/xbuild /property:Configuration=Release ${SLN} | indent
 fi
 
 echo "-----> Build SUCCESS"
