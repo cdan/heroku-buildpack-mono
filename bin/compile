@@ -35,13 +35,14 @@ echo ${CACHE_DIR}
 echo "-----> Bundling Mono v${MONO_VERSION}"
 #if [ ! -d "${CACHE_DIR}/mono" ]; then
   echo "Fetching Mono v${MONO_VERSION} @ ${MONO_PACKAGE}" | indent
-  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}
+  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}/mono
 #fi
-cp -r "${CACHE_DIR}/bin" ./mono/
-cp -r "${CACHE_DIR}/etc" ./mono/
-cp -r "${CACHE_DIR}/lib" ./mono/
-cp -r "${CACHE_DIR}/share" ./mono/
-cp -r "${CACHE_DIR}/include" ./mono/
+cp -r "${CACHE_DIR}/mono" .
+#cp -r "${CACHE_DIR}/bin" ./mono/
+#cp -r "${CACHE_DIR}/etc" ./mono/
+#cp -r "${CACHE_DIR}/lib" ./mono/
+#cp -r "${CACHE_DIR}/share" ./mono/
+#cp -r "${CACHE_DIR}/include" ./mono/
 
 
 
@@ -67,19 +68,19 @@ if [ "${SLN}" != "" ]; then
   echo "-----> Compiling Mono application"
 
   # need Mono in its expected location for xbuild to work
-  #ln -s "${CACHE_DIR}/mono" /app
-  ln -s "${CACHE_DIR}/bin" /app/mono
-  ln -s "${CACHE_DIR}/etc" /app/mono
-  ln -s "${CACHE_DIR}/include" /mono
-  ln -s "${CACHE_DIR}/share" /app/mono
-  ln -s "${CACHE_DIR}/lib" /app/mono
+  ln -s "${CACHE_DIR}/mono" /app
+  #ln -s "${CACHE_DIR}/bin" /app/mono
+  #ln -s "${CACHE_DIR}/etc" /app/mono
+  #ln -s "${CACHE_DIR}/include" /mono
+  #ln -s "${CACHE_DIR}/share" /app/mono
+  #ln -s "${CACHE_DIR}/lib" /app/mono
   
   ls /app/mono
   
   export PATH="/app/mono/bin:${PATH}"
 
   #${CACHE_DIR}/bin/xbuild /property:Configuration=Release ${SLN} | indent
-  ${CACHE_DIR}/bin/xbuild  ${SLN} | indent
+  xbuild  ${SLN} | indent
 fi
 
 echo "-----> Build SUCCESS"
