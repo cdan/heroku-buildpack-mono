@@ -68,9 +68,14 @@ if [ "${SLN}" != "" ]; then
 
   # need Mono in its expected location for xbuild to work
   #ln -s "${CACHE_DIR}/mono" /app
-  ln -s "${CACHE_DIR}/mono" /app
-  ln -s "${CACHE_DIR}/mono" /app
-  ln -s "${CACHE_DIR}/mono" /app
+  ln -s "${CACHE_DIR}/bin" /app/mono
+  ln -s "${CACHE_DIR}/etc" /app/mono
+  ln -s "${CACHE_DIR}/include" /mono
+  ln -s "${CACHE_DIR}/share" /app/mono
+  ln -s "${CACHE_DIR}/lib" /app/mono
+  
+  ls /app/mono
+  
   export PATH="/app/mono/bin:${PATH}"
 
   #${CACHE_DIR}/bin/xbuild /property:Configuration=Release ${SLN} | indent
