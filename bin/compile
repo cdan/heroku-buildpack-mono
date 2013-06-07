@@ -38,7 +38,7 @@ if [ ! -d "${CACHE_DIR}/mono" ]; then
   curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzvf - -C ${CACHE_DIR}
 fi
 #cp -r "${CACHE_DIR}/mono" .
-ll "${CACHE_DIR}"
+ls "${CACHE_DIR}"
 
 echo "-----> Bundling XSP v${XSP_VERSION}"
 if [ ! -d "${CACHE_DIR}/xsp" ]; then
