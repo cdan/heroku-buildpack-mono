@@ -30,15 +30,15 @@ CACHE_DIR=$2
 cd ${BUILD_DIR}
 
 # cache may not exist yet
-mkdir -p ${CACHE_DIR}
+mkdir -p ${CACHE_DIR}/mono/lib/mono/gac/
 
 echo "-----> Bundling Mono v${MONO_VERSION}"
 if [ ! -d "${CACHE_DIR}/mono" ]; then
   echo "Fetching Mono v${MONO_VERSION} @ ${MONO_PACKAGE}" | indent
   curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzvf - -C ${CACHE_DIR}
 fi
-#cp -r "${CACHE_DIR}/mono" .
-ls "${CACHE_DIR}"
+cp -r "${CACHE_DIR}/*" ./mono/
+echo ${CACHE_DIR}
 
 echo "-----> Bundling XSP v${XSP_VERSION}"
 if [ ! -d "${CACHE_DIR}/xsp" ]; then
